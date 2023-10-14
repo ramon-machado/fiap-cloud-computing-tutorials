@@ -19,13 +19,15 @@ def put_events_orders(eventBus, source, detailType, detail):
     print("EventBridge Response: {}".format(json.dumps(response)))
     
 
-eventBus="<Adicione o nome do barramento>"
-source = "<Adicione a fonte do evento>"
-detailType = "<Adicione o detalhe do Evento>"
-detail = <Adiocione o conteudo do evento>
+eventBus="Orders"
+source = "com.aws.orders"
+detailType = "Order Notification"
+detail = {
+    "category": "lab-supplies",
+    "value": 415,
+    "location": "eu-west"
+}
 
 for i in range(10):
     print(i)
     put_events_orders(eventBus, source, detailType, detail)
-
-
