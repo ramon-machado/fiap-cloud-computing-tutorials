@@ -24,13 +24,13 @@ functions:
     handler: handler.detailHandler
     events:
       - eventBridge:
-        eventBus:
-          - arn:aws:events:us-east-1:565314625672:event-bus/Orders
-        pattern:
-          source:
-            - com.aws.orders
-          detail-type:
-            - Order Notification
-          detail:
-            location:
-              - eu-west
+          eventBus:
+            - arn:aws:events:us-east-1:565314625672:event-bus/Orders
+          pattern:
+            source:
+              - com.aws.orders
+            detail-type:
+              - Order Notification
+            detail:
+              location:
+                - eu-west
