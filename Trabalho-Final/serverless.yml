@@ -4,11 +4,16 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: python3.9
+  lambdaHashingVersion: 20201221
+  iam:
+    role: !Sub arn:aws:iam::565314625672:role/LabRole
+  eventBridge:
+    useCloudFormation: true
 
 
 functions:
   sourcepizza:
-    handler: handler.sourcepizza
+    handler: handler.sourceHandlerpizza
     events:
       - eventBridge:
           eventBus:
@@ -17,12 +22,16 @@ functions:
             source:
               - com.pizza.status
   detailpizza:
-    handler: hand.detailpizza
+    handler: handler.detailHandlerpizza
     events:
       - eventBridge:
           eventBus:
             - arn:aws:events:us-east-1:565314625672:event-bus/pizzaria
           pattern:
-            source: com.pizza.status
-            detail-type: Alteracao Pizza
-            status: pronto
+            source: 
+              - com.pizza.status
+            detail-type: 
+              - Alteracao Pizza
+            detail:
+              status:
+                - pronto
