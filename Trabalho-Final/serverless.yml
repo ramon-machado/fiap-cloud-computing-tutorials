@@ -1,0 +1,28 @@
+service: trabalho-final
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: python3.9
+
+
+functions:
+  sourcepizza:
+    handler: handler.sourcepizza
+    events:
+      - eventBridge:
+          eventBus:
+            - arn:aws:events:us-east-1:565314625672:event-bus/pizzaria
+          pattern:
+            source:
+              - com.pizza.status
+  detailpizza:
+    handler: hand.detailpizza
+    events:
+      - eventBridge:
+          eventBus:
+            - arn:aws:events:us-east-1:565314625672:event-bus/pizzaria
+          pattern:
+            source: com.pizza.status
+            detail-type: Alteracao Pizza
+            status: pronto
