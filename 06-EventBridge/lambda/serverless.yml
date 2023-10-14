@@ -6,7 +6,7 @@ provider:
   runtime: python3.9
   lambdaHashingVersion: 20201221
   iam:
-    role: !Sub arn:aws:iam::${aws::accountId}:role/Admin
+    role: !Sub arn:aws:iam::565314625672:role/LabRole
   eventBridge:
     useCloudFormation: true
 
@@ -16,7 +16,7 @@ functions:
     events:
       - eventBridge:
           eventBus:
-            - arn:aws:events:${aws:region}:${aws:accountID}:event-bus/Orders
+            - arn:aws:events:us-east-1:565314625672:event-bus/Orders
           pattern:
             source:
               - com.aws.orders
@@ -25,7 +25,7 @@ functions:
     events:
       - eventBridge:
         eventBus:
-          - arn:aws:events:${aws:region}:${aws:accountID}:event-bus/Orders
+          - arn:aws:events:us-east-1:565314625672:event-bus/Orders
         pattern:
           source:
             - com.aws.orders
