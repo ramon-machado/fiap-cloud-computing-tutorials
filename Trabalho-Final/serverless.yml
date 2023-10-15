@@ -8,11 +8,11 @@ provider:
   memorySize: 128
   timeout: 300
   iam:
-    role: !Sub arn:aws:iam::956563431785:role/LabRole
+    role: !Sub arn:aws:iam::${aws:accountId}:role/LabRole
   eventBridge:
     useCloudFormation: true
   environment:
-    sqs_url: !Sub https://sqs.us-east-1.amazonaws.com/956563431785/espera-entrega
+    sqs_url: !Sub https://sqs.us-east-1.amazonaws.com/${aws:accountId}/espera-entrega
 
 
 functions:
@@ -21,7 +21,7 @@ functions:
     events:
       - eventBridge:
           eventBus:
-            - arn:aws:events:us-east-1:956563431785:event-bus/pizzaria
+            - arn:aws:events:us-east-1:${aws:accountId}:event-bus/pizzaria
           pattern:
             source:
               - com.pizza.status
@@ -30,7 +30,7 @@ functions:
     events:
       - eventBridge:
           eventBus:
-            - arn:aws:events:us-east-1:956563431785:event-bus/pizzaria
+            - arn:aws:events:us-east-1:${aws:accountId}:event-bus/pizzaria
           pattern:
             source: 
               - com.pizza.status
