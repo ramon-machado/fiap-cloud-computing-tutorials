@@ -16,9 +16,6 @@ def sourceHandlerpizza(event, context):
         {'pedido':(format(json.dumps(event['detail']['pedido']))),
         'status':(format(json.dumps(event['detail']['status']))),
         'cliente':(format(json.dumps(event['detail']['cliente']))),
-        'time':(format(json.dumps(event['detail']['time'])))}
+        'time':(format(json.dumps(event['time'])))}
     
     )
-    #dao.put_item("event: {}".format(json.dumps(event)))
-    
-    return True
