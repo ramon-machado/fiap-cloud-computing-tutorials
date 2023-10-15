@@ -5,10 +5,14 @@ provider:
   name: aws
   runtime: python3.9
   lambdaHashingVersion: 20201221
+  memorySize: 128
+  timeout: 300
   iam:
-    role: !Sub arn:aws:iam::565314625672:role/LabRole
+    role: !Sub arn:aws:iam::956563431785:role/LabRole
   eventBridge:
     useCloudFormation: true
+  environment:
+    sqs_url: !Sub https://sqs.us-east-1.amazonaws.com/956563431785/espera-entrega
 
 
 functions:
@@ -17,7 +21,7 @@ functions:
     events:
       - eventBridge:
           eventBus:
-            - arn:aws:events:us-east-1:565314625672:event-bus/pizzaria
+            - arn:aws:events:us-east-1:956563431785:event-bus/pizzaria
           pattern:
             source:
               - com.pizza.status
@@ -26,7 +30,7 @@ functions:
     events:
       - eventBridge:
           eventBus:
-            - arn:aws:events:us-east-1:565314625672:event-bus/pizzaria
+            - arn:aws:events:us-east-1:956563431785:event-bus/pizzaria
           pattern:
             source: 
               - com.pizza.status
@@ -35,3 +39,5 @@ functions:
             detail:
               status:
                 - pronto
+  consumerpizza:
+    handler: handler.consumerHandlerpizza
